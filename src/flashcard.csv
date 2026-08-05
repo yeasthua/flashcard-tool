@@ -1,0 +1,14 @@
+Question;Answer
+What is the capital of France?;Paris
+What keyword defines a function in Python?;def
+What does len() return?;The length of an object
+What data type stores whole numbers?;int
+What data type stores decimal numbers?;float
+What data type stores text?;str
+What Boolean value represents truth?;True
+What Boolean value represents falsehood?;False
+Which loop repeats while a condition is true?;while
+What does append() do?;Adds an item to the end of a list
+What does strip() do?;Removes leading and trailing whitespace
+What does split(",") do?;Splits a string using commas
+What does append() do?;Adds an item to the end of a list
