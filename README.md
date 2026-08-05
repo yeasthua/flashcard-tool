@@ -1,0 +1,13 @@
+# Flashcard Tool
+
+A simple command-line flashcard quiz written in Python.
+
+The program reads flashcards from a file, asks each question, checks the user's answers, and displays the final score.
+
+## Features
+
+- Read flashcards from a `.csv` file
+- Ask questions one by one in order
+- Case-insensitive answer checking
+- Skip malformed lines in the flashcard file
+- Display the final score
