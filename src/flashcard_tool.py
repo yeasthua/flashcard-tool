@@ -1,15 +1,23 @@
-with open("flashcard.csv") as file:
+FILENAME = "flashcard.csv"
+
+with open(FILENAME) as file:
 
     correct = 0
     questions = 0
-
+    
     next(file)  # Skips header
     for line in file:
-        flashcard = line.strip().split(";")
 
-        answer = input(f"{flashcard[0]}: ")
+        try:
+            question, correct_answer = line.split(";")
+            question = question.strip()
+            correct_answer = correct_answer.strip()
+        except ValueError:  # Skips bad lines
+            continue
 
-        if answer.lower() == flashcard[1].lower():
+        answer = input(f"{question}: ")
+
+        if answer.lower() == correct_answer.lower():
             print("Correct!")
             correct += 1
         else:
