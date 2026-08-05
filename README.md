@@ -11,3 +11,10 @@ The program reads flashcards from a file, asks each question, checks the user's 
 - Case-insensitive answer checking
 - Skip malformed lines in the flashcard file
 - Display the final score
+
+## How to run
+```bash
+git clone https://github.com/yeasthua/flashcard_tool
+cd flashcard_tool
+python main.py
+```
