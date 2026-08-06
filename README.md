@@ -12,6 +12,11 @@ The program reads flashcards from a file, asks each question, checks the user's 
 - Skip malformed lines in the flashcard file
 - Display the final score
 
+## .csv Format
+```bash
+Question;Answer
+```
+
 ## How to run
 ```bash
 git clone https://github.com/yeasthua/flashcard_tool
