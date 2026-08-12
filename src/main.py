@@ -9,7 +9,7 @@ def read_file(filename: str) -> list[list]:
     
         # Appends each question and answers into rows
         for line in file:
-            if line == "":  # Skips line that is empty
+            if line.strip() == "":  # Skip empty line
                 continue
     
             try:
@@ -48,11 +48,10 @@ def run_quiz(filename: str):
 
 def write_flashcards():
     filename = input("Enter new filename (.csv only): ")
-    if ".csv" not in filename:  # If file extension is not .csv
-        raise TypeError
+    if not filename.endswith(".csv"):  # If file extension is not .csv
+        raise ValueError
     
-    cards = []
-    cards.append("Question;Answer\n")     # Add header to flashcard
+    cards = ["Question;Answer\n"]     # Add header to flashcard
 
     print("==== WRITE FLASHCARD  ====")
     print("    Input '1' to exit   \n")
@@ -79,13 +78,22 @@ def create_file(filename: str, cards: list):
 
 def delete_contents(filename: str):
     "Deletes all contents of the given filename"
-    if ".csv" not in filename:
-        raise TypeError
+    if not filename.endswith(".csv"):   # If file extension is not .csv
+        raise ValueError
 
-    with open(filename, "w") as file:
-        pass
+    while True:
+        print(f"\nAre you sure you want to erase all contents of {filename}?")
+        choice = input("Type YES to confirm, type NO to cancel: ")
 
-    print("STATUS: All contents erased!")
+        if choice.lower() == "yes":
+            with open(filename, "w") as file:
+                pass
+
+            print("STATUS: All contents erased")
+            break
+        elif choice.lower() == "no":
+            print("[Function aborted]")
+            break
 
 
 def main():
@@ -134,7 +142,7 @@ def main():
             try:
                 file_name, flashcards = write_flashcards()
                 create_file(file_name, flashcards)
-            except TypeError:
+            except ValueError:
                 print("ERROR: Invalid file extension")
             except OSError:
                 print("ERROR: Cannot create file [Invalid filename]")
@@ -145,7 +153,7 @@ def main():
             try:
                 filename_delete = input("Enter filename to erase all content: ")
                 delete_contents(filename_delete)
-            except TypeError:
+            except ValueError:
                 print("ERROR: Invalid file extension")
             except OSError:
                 print("ERROR: Invalid filename")
