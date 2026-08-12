@@ -10,4 +10,4 @@ What Boolean value represents falsehood?;False
 Which loop repeats while a condition is true?;while
 What does append() do?;Adds an item to the end of a list
 What does strip() do?;Removes leading and trailing whitespace
-What does split(",") do?;Splits a string using commas
+What does split(',') do?;Splits a string using commas
