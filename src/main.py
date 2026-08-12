@@ -1,28 +1,70 @@
-FILENAME = "flashcard.csv"
+import random # For shuffling questions
 
-with open(FILENAME) as file:
+def read_file(filename: str) -> list[list]:
+    "Reads the flashcard file, and then returns a list of lists which contains each line in the file (except header)"
 
-    correct = 0
-    questions = 0
+    with open(filename) as file:
+        rows = []
+        next(file)  # Skips header
     
-    next(file)  # Skips header
-    for line in file:
+        # Appends each question and answers into rows
+        for line in file:
+    
+            try:
+                rows.append(line.strip().split(";"))
+            except ValueError:  # Skips bad lines
+                continue
+    return rows
 
-        try:
-            question, correct_answer = line.split(";")
-            question = question.strip()
-            correct_answer = correct_answer.strip()
-        except ValueError:  # Skips bad lines
-            continue
+def run_quiz(filename: str):
+    """
+    Asks the user for an answer to each question based on the file,
+    evaluates each answer if they are correct or incorrect,
+    and display the total score
+    """
+    questions_and_answers = read_file(filename)
+    random.shuffle(questions_and_answers)   # Shuffles the flashcards
 
-        answer = input(f"{question}: ")
+    print("\n==== QUIZ START ====")
+    correct = 0
+    card_num = 1
 
-        if answer.lower() == correct_answer.lower():
-            print("Correct!")
+    for item in questions_and_answers:
+        question, correct_answer = item     # Unpacks the list
+
+        print(f"card {card_num} / {len(questions_and_answers)}")
+        user_answer = input(f"{question}: ")
+        card_num += 1
+
+        if user_answer.lower() == correct_answer.lower():
+            print("Correct!\n")
             correct += 1
         else:
-            print("Wrong!")
-        questions += 1
-        print()
+            print("Incorrect\n")
 
-    print(f"Your score is {correct}/{questions}")
+    print(f"You scored {correct}/{len(questions_and_answers)}")
+
+
+def main():
+    print("""
+    ╱╭━┳╮╱╱╱╱╱╱╭╮╱╱╱╱╱╱╱╱╱╱╱╭╮╱╱╭╮╱╱╱╱╱╱╭╮
+    ╱┃╭┫┃╱╱╱╱╱╱┃┃╱╱╱╱╱╱╱╱╱╱╱┃┃╱╭╯╰╮╱╱╱╱╱┃┃
+    ╭╯╰┫┃╭━━┳━━┫╰━┳━━┳━━┳━┳━╯┃╱╰╮╭╋━━┳━━┫┃
+    ╰╮╭┫┃┃╭╮┃━━┫╭╮┃╭━┫╭╮┃╭┫╭╮┣━━┫┃┃╭╮┃╭╮┃┃
+    ╱┃┃┃╰┫╭╮┣━━┃┃┃┃╰━┫╭╮┃┃┃╰╯┣━━┫╰┫╰╯┃╰╯┃╰╮
+    ╱╰╯╰━┻╯╰┻━━┻╯╰┻━━┻╯╰┻╯╰━━╯╱╱╰━┻━━┻━━┻━╯
+                                by yeasthua\n
+    """)
+
+    while True:
+        filename = input("+ Enter which file would you like to use (.csv files only): ")
+
+        try:
+            run_quiz(filename)
+            break
+        except FileNotFoundError:
+            print("File not found, please try again.\n")
+            continue
+    
+
+main()
