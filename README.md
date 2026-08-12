@@ -1,4 +1,4 @@
-# Flashcard Tool
+# flashcard-tool
 
 A simple command-line flashcard quiz written in Python.
 
