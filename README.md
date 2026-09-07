@@ -10,7 +10,7 @@ The program reads flashcards from a file, asks each question, checks the user's 
 - Ask questions one by one in random order
 - Case-insensitive answer checking
 - Skip malformed lines in the flashcard file
-- Display the final 
+- Display the final score
 - Create a new flashcard file
 - Delete the contents of a file
 
