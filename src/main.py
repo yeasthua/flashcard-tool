@@ -13,7 +13,8 @@ def read_file(filename: str) -> list[list]:
                 continue
     
             try:
-                rows.append(line.strip().split(";"))
+                # Strips all leading & trailing whitespaces in each question & answer
+                rows.append([item.strip() for item in line.split(";")])
             except ValueError:  # Skips lines that has incorrect format
                 continue
     return rows
